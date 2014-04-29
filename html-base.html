@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="zh" class="ie ie6"><![endif]-->
+<!--[if IE 7]><html lang="zh" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="zh" class="ie8"><![endif]-->
+<!--[if !IE]><!--><html lang="zh"><!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta content="all" name="robots" />
+    <meta name="keywords" content="前端规范,前端规范手册,日日顺前端规范手册,日日顺B2B官网前端规范手册" />
+    <meta name="description" content="本手册适用于日日顺B2B官网，包括HTML规范、CSS规范、JS规范、工程师规范，代码库等，B2B官网所需页面均应以此手册为准。" />
+    <meta name="author" content="http://www.365rrs.com-日日顺B2B官网" />
+    <meta name="viewport" content="width=device-width"/>
+    <title>日日顺B2B官网-前端规范手册</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="/csslib/ui/ui.css?v=20131212"/>
+    <!-- 单页样式 -->
+</head>
+<body data-nav="html-base">
+<!-- 头部 -->
+<div class="ui-g-header" data-in="in/header"></div>
+<!-- /头部 -->
+<!-- 主体 -->
+<div class="ui-g-section clearfix">
+    <!-- 左侧共用部分 -->
+    <div class="ui-g-side" data-in="in/left" id="j-ui-side"></div>
+    <!-- /左侧共用部分 -->
+    <!-- 右侧部分 -->
+    <div class="ui-g-article">
+        <div class="ui-g-main">
+            <div class="ui-m-article">
+                <h2 class="ui-u-title">
+                    HTML规范 - 整体结构
+                </h2>
+                <dl>
+                    <dt>
+                        HTML基础设置
+                    </dt>
+                    <dd>
+                        <p>基本准则：页面符合web标准，语义化html，结构表现行为分离，兼容性优良，代码简洁明了有序，尽可能的减小服务器负载，保证最快的解析速度。</p>
+                        <ul>
+                            <li>文件应以“&lt;!DOCTYPE html&gt;”或“&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;”首行顶格开始。<br/>推荐使用“&lt;!DOCTYPE html&gt;”。
+                            </li>
+                            <li>必须申明文档的编码charset，统一为UTF-8编码，书写格式为：&lt;meta charset="utf-8"/&gt;。
+                            </li>
+                            <li>根据页面内容和需求填写适当的keywords和description。
+                            </li>
+                            <li><span class="s-red">页面title是极为重要的不可缺少的一项，且每页title应根据页面内容及需求填写。</span><br/>
+                            推荐写法：<br/>
+                            首页：日日顺B2B官网-*****平台（用半角中线分隔）<br/>
+                            频道：产品信息_日日顺B2B官网（用半角下线分隔）<br/>
+                            内容：产品品牌-产品类别-产品型号_日日顺B2B官网（用半角中线与半角下线组合分隔）
+                            </li>
+                            <li>加入版权声明：&lt;meta name="author" content="http://www.365rrs.com-日日顺B2B官网" /&gt;
+                            </li>
+                            <li>网站制作favicon.ico文件，并置于网站根目录。
+                            </li>
+                            <li>页面样式、JS、图片默认为绝对地址加载。</li>
+                            <li> 非特殊情况下样式文件必须外链至&lt;head&gt;…&lt;/head&gt;之间;非特殊情况下JS文件必须外链至页面底部;</li>
+                            <li>杜绝使用&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt; 兼容 ie8;</li>
+                            <li>为提高网站响应速度，超过一屏的页面，应使用lazyload来加载图片。
+                            <pre class="brush:html">&lt;img class="j-lazy" src="/images/t.gif" data-original="/images/logo.jpg" width="100" height="100" /&gt;</pre>
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>网站目录划分</dt>
+                    <dd>
+                        网站默认静态文件夹为:static<br/>
+                        <strong><a href="html-tree.html">点击查看static文件夹结构</a></strong><br/>
+                        注：如网站开设专题、活动等，可另外开设special文件夹，图片，样式，JS等自设路径。<br/>目录、文件的名称全部用小写英文字母、数字、点、中线、下线组合而成，其中不得包含汉字、空格和特殊字符；目录命名尽量以英文为指导，尽量避免用拼音命名。
+                    </dd>
+                    <dt>
+                        结构顺序和视觉顺序基本保持一致
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li>按照从上至下、从左到右的视觉顺序书写HTML结构。
+                            </li>
+                            <li>有时候为了便于搜索引擎抓取，我们也会将重要内容在HTML结构顺序上提前。
+                            </li>
+                            <li>用div代替table布局，可以使HTML更具灵活性，也方便利用CSS控制。
+                            </li>
+                            <li><strong>table不建议用于布局，但表现具有明显表格形式的数据，table还是首选。</strong>
+                            </li>
+                            <li>重要图片必须加上alt属性; 给重要的元素和截断的元素加上title。</li>
+                            <li>必须为含有描述性表单元素(input， textarea，radio，checkbox)添加label。
+<pre class="brush:html">
+<!-- 不正确 -->
+&lt;p&gt;姓名: &lt;input type="text" id="j-name" name="name" /&gt;&lt;/p&gt;
+
+<!-- 正确 -->
+&lt;p&gt;&lt;label for="j-name"&gt;姓名: &lt;/label&gt;&lt;input type="text" id="j-name" name="name" /&gt;&lt;/p&gt;
+</pre>
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>
+                        结构、表现、行为三者分离，避免内联
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li>使用link将css文件引入，并置于head中，单页样式可引入也可写入页面内。
+                            </li>
+                            <li>使用script将sea.js,sea-config.js文件引入，并置于body底部，具体参照template模板。
+                            </li>
+                            <li>代码中不得涉及任何表现元素，如font、bgColor、border等，style除外，但不可滥用。
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>
+                        保持良好的简洁的树形结构
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li>每一个块级元素都另起一行，每一行都使用Tab缩进对齐。删除冗余的行尾的空格。
+                            </li>
+                            <li>使用4个空格代替1个Tab（大多数编辑器中可设置）。
+                            </li>
+                            <li>你也可以在大的模块之间用空行隔开，使模块更清晰。
+                            </li>
+                            <li>如使用pre标签，可直接使用显示效果结构。
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>适当使用实体</dt>
+                    <dd>
+                        <p>以实体代替与HTML语法相同的字符，避免浏览解析错误。</p>
+                        <table>
+                                <caption>常用HTML字符实体（建议使用实体）：</caption>
+                                <thead>
+                                    <tr><th>字符</th><th>名称</th><th>实体名</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>"</td><td>双引号</td><td>&amp;quot;</td></tr>
+                                    <tr><td>&amp;</td><td>&amp;符</td><td>&amp;amp;</td></tr>
+                                    <tr><td>&lt;</td><td>左尖括号（小于号）</td><td>&amp;lt;</td></tr>
+                                    <tr><td>&gt;</td><td>右尖括号（大于号）</td><td>&amp;gt;</td></tr>
+                                    <tr><td>&nbsp;</td><td>空格</td><td>&amp;nbsp;</td></tr>
+                                </tbody>
+                        </table>
+                    </dd>
+                    <dt>
+                        另外，请做到以下几点
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li>结构上如果可以并列书写，就不要嵌套。
+                                <p>
+                                    如果可以写成&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;那么就不要写成&lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+                                </p>
+                            </li>
+                            <li>如果结构已经可以满足视觉和语义的要求，那么就不要有额外的冗余的结构。
+                                <p>
+                                    比如&lt;div&gt;&lt;h2&gt;&lt;/h2&gt;&lt;/div&gt;已经能满足要求，那么就不要再写成&lt;div&gt;&lt;div&gt;&lt;h2&gt;&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+                                </p>
+                            </li>
+                            <li>一个标签上引用的className不要过多，越少越好。
+                                <p>
+                                比如不要出现这种情况：&lt;div class="class1 class2 class3 class4"&gt;&lt;/div&gt;
+                                </p>
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>HTML模板</dt>
+                    <dd>
+                    <div data-in="in/h-template"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div class="ui-g-footer" data-in="in/footer"></div>
+        <!-- /底部 -->
+    </div>
+</div>
+<!-- /主体 -->
+<script src="/utils/sea.js?v=20131212" id="seajsnode"></script>
+<script src="/utils/sea-config.js?v=20131212"></script>
+<script type="text/javascript">
+    //单页JS代码
+    seajs.use("c-ui");
+</script>
+</body>
+</html>

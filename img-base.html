@@ -15,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="/csslib/ui/ui.css?v=20131212"/>
     <!-- 单页样式 -->
 </head>
-<body>
+<body data-nav="imbase">
 <!-- 头部 -->
 <div class="ui-g-header" data-in="in/header"></div>
 <!-- /头部 -->
@@ -29,27 +29,17 @@
         <div class="ui-g-main">
             <div class="ui-m-article">
                 <h2 class="ui-u-title">
-                    日日顺B2B官网-前端规范手册
+                    图片规范
                 </h2>
                 <dl>
-                    <dt>前端规范是什么？</dt>
-                    <dd>
-                        简单说，前端规范是规定了前端开发过程中（HTML、CSS、JS）需要遵守的开发规范，同时前端规范还包含代码库，可以利用代码库快速制作出符合规范的页面。
-                    </dd>
-                    <dt>为什么需要制定前端规范？</dt>
-                    <dd>
-                        <p>首先明确一点，规范并不是为了限制什么，而是为了提高协作效率而做出的一个约定。使用规范可以加强团队之间的合作，提高协作效率，从而形成一种团队文化。其最终目的是为项目服务，所做一切都是为了优化项目和流程，提高工作效率。</p>
-                        <ul>
-                            <li>保持编码风格，注释风格一致，应用设计模式一致。</li>
-                            <li>提高团队协作效率，便于后端工程师添加修改功能及前端工程师后期优化维护。</li>
-                            <li>因为有规可依，所以可减少代码中bug出现的可能性。</li>
-                            <li>使用代码库，可以帮助前后端工程师快速制作出符合规范的页面。</li>
-                            <li>遵循业界广泛采用的编码规范更容易获得辅助工具。</li>
-                            <li>新进员工通过熟悉编码规范，更容易、更快速地掌握熟悉项目，融入团队。</li>
-                        </ul>
-                    </dd>
-                    <dt>实践过程</dt>
-                    <dd>此规范自发布之日起执行！如有任何问题，请及时沟通，以便调整本规范的相关代码库和文档。联系方式：<a href="mailto:fangyong.1169@haier.com">fangyong.1169@haier.com</a></dd>
+                    <dt>
+                        总体规范
+                    </dt>
+                    <dd>在不影响图片质量的前提下，图片尽可能的小。必要时可利用工具进行压缩，推荐grunt-contrib-imagemin。</dd>
+                    <dt>
+                        文件目录
+                    </dt>
+                    <dd>图片统一放入/pub/images/目录下</dd>
                 </dl>
             </div>
         </div>
@@ -64,6 +54,9 @@
 <script type="text/javascript">
     //单页JS代码
     seajs.use("c-ui");
+    seajs.use(["base"],function(b2b){
+        b2b.include("h-template");
+    });
 </script>
 </body>
 </html>

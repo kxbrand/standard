@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="zh" class="ie ie6"><![endif]-->
+<!--[if IE 7]><html lang="zh" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="zh" class="ie8"><![endif]-->
+<!--[if !IE]><!--><html lang="zh"><!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta content="all" name="robots" />
+    <meta name="keywords" content="前端规范,前端规范手册,日日顺前端规范手册,日日顺B2B官网前端规范手册" />
+    <meta name="description" content="本手册适用于日日顺B2B官网，包括HTML规范、CSS规范、JS规范、工程师规范，代码库等，B2B官网所需页面均应以此手册为准。" />
+    <meta name="author" content="http://www.365rrs.com-日日顺B2B官网" />
+    <meta name="viewport" content="width=device-width"/>
+    <title>日日顺B2B官网-前端规范手册</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="/csslib/ui/ui.css?v=20131212"/>
+    <!-- 单页样式 -->
+</head>
+<body data-nav="html-email">
+<!-- 头部 -->
+<div class="ui-g-header" data-in="in/header"></div>
+<!-- /头部 -->
+<!-- 主体 -->
+<div class="ui-g-section clearfix">
+    <!-- 左侧共用部分 -->
+    <div class="ui-g-side" data-in="in/left" id="j-ui-side"></div>
+    <!-- /左侧共用部分 -->
+    <!-- 右侧部分 -->
+    <div class="ui-g-article">
+        <div class="ui-g-main">
+            <div class="ui-m-article">
+                <h2 class="ui-u-title">
+                    HTML规范 - 邮件内容
+                </h2>
+                <dl>
+                    <dt>
+                        邮件环境
+                    </dt>
+                    <dd>
+                        <p>
+                            邮件内容所在上下文或者说所在外部容器（以下简称环境）都是由邮箱服务商决定的，这就要求邮件内容需要在任何一种情况下都要正确显示。
+                        </p>
+                        <p>
+                            这些环境可能是以下某几种情况：
+                        </p>
+                        <ul>
+                            <li>可能是个iframe，你的内容是被放在body里面的；可能只是个div，你的内容就被放在这个div里面。
+                            </li>
+                            <li>可能邮箱自身设置了些css，他可能对你产生未知的影响。
+                            </li>
+                            <li>可能根本没有申明doctype，即使申明了，也不是你想要的doctype。
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>
+                        避免被嵌套在不正确的容器里
+                    </dt>
+                    <dd>
+                        <p>
+                            惑：因为容器可能是body或div，所以，我们邮件内容不应该是一个完整的html。
+                        </p>
+                        <p>
+                            解：所以邮件内容应该是以div为根节点的html片段。
+                        </p>
+                    </dd>
+                    <dt>
+                        避免css冲突或被覆盖
+                    </dt>
+                    <dd>
+                        <p>
+                            惑：因为环境中可能已经设置了css，比如一些reset、一些.class。
+                        </p>
+                        <p>
+                            解：所以我们只能使用行内style来确保我们的效果，并且在内容根节点上设置基础style，并且尽量使用div、span等无语义标签。
+                        </p>
+<pre class="brush:html">
+&lt;!-- 根节点 --&gt;
+&lt;div style="width:600px;text-align:left;color:#000;font:normal 12px/15px arial,simsun;background:#fff;"&gt;
+    内容区域
+&lt;/div&gt;
+&lt;!-- 根节点-邮件内容居中 --&gt;
+&lt;div style="text-align:center;"&gt;
+    &lt;div style="width:600px;margin:0 auto;text-align:left;color:#000;font:normal 12px/15px arial,simsun;background:#fff;"&gt;
+        内容区域
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- 如果使用语义化标签，那么需要多写一些style，以避免被环境中的css覆盖 --&gt;
+&lt;h2 style="width:100px;height:100px;margin:0;padding:0;fong-weight:normal;font-size:12px;"&gt;&lt;/h2&gt;
+&lt;!-- 而使用无语义标签，就可以省下很多style --&gt;
+&lt;div style="width:100px;height:100px;"&gt;&lt;/div&gt;
+</pre>
+                    </dd>
+                    <dt>
+                        避免盒模型错误
+                    </dt>
+                    <dd>
+                        <p>
+                            惑：因为doctype的不确定性，我们在写style的时候，应该考虑无论doctype是什么情况，都可以正常显示，doctype影响最大的就是盒模型的解析。
+                        </p>
+                        <p>
+                            解：所以我们要将盒模型拆分开来写，比如我们将原本要定义在某个div上的height和padding分别写到这个div和他的父元素或子元素上。
+                        </p>
+<pre class="brush:html">
+&lt;div style="height:100px;padding:20px 0;"&gt;内容&lt;/div&gt;
+&lt;!-- 上面的写法应该改成以下写法 --&gt;
+&lt;div style="padding:20px 0;"&gt;&lt;div style="height:100px;"&gt;内容&lt;/div&gt;&lt;/div&gt;
+</pre>
+                    </dd>
+                    <dt>
+                        其他注意事项
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li>因为只能使用行内style，所以清除浮动需要使用额外标签。
+                            </li>
+                            <li>避免使用绝对定位，可能会被过滤。
+                            </li>
+                            <li>避免使用js，可能会被过滤。
+                            </li>
+                            <li>避免使用table布局，不易于修改维护。
+                            </li>
+                            <li>背景图片或内容图片上的文字信息，必须在代码中可见。
+                            </li>
+                            <li>如果没有特殊要求，所有a链接都要从新窗口打开，即target="_blank"，且a标签内容不能为空。
+                            </li>
+                            <li>所有链接必须设置使用颜色、是否下划线，即style="text-decoration:;color:;"。
+                            </li>
+                            <li>重点检查ie！！！
+                            </li>
+                        </ul>
+<pre class="brush:html">
+&lt;div style="width:600px;text-align:left;color:#000;font:normal 12px/15px simsun;background:#d9d9d9;"&gt;
+    &lt;div style="height:268px;background:url(images/bg1.jpg) no-repeat;"&gt;
+        &lt;div style="height:228px;"&gt;
+            &lt;div style="padding:21px 0 0 21px;"&gt;
+                &lt;a href="javascript:void(0)" target="_blank" style="display:block;width:111px;height:28px;overflow:hidden;text-indent:-2000px;text-decoration:none;" title="title"&gt;内容&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;h2 style="margin:0;padding:0;width:0;height:0;overflow:hidden;text-indent:-2000px;"&gt;内容&lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div style="padding:0 0 0 35px;"&gt;&lt;a href="javascript:void(0)" target="_blank" style="color:#f00;text-decoration:none;" title="title"&gt;内容&lt;/a&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </dd>
+                    <dt>
+                        发现的问题及解决方案
+                    </dt>
+                    <dd>
+                        <p>
+                            问题：部分智能手机的邮件客户端可能会有只显示部分的bug（宽度被截）。
+                        </p>
+                        <p>
+                            解决：在外面套一个同宽的table即可。
+                        </p>
+<pre class="brush:html">
+&lt;table width="600" cellpadding="0" cellspacing="0" border="0"&gt;&lt;tr&gt;&lt;td&gt;
+    &lt;div style="width:600px;text-align:left;color:#000;font:normal 12px/15px simsun;background:#d9d9d9;"&gt;
+        ......
+    &lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+</pre>
+                    </dd>
+                    <dt>
+                        Email模板
+                    </dt>
+                    <dd>
+                    <div data-in="in/h-email"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div class="ui-g-footer" data-in="in/footer"></div>
+        <!-- /底部 -->
+    </div>
+</div>
+<!-- /主体 -->
+<script src="/utils/sea.js?v=20131212" id="seajsnode"></script>
+<script src="/utils/sea-config.js?v=20131212"></script>
+<script type="text/javascript">
+    //单页JS代码
+    seajs.use("c-ui");
+</script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="zh" class="ie ie6"><![endif]-->
+<!--[if IE 7]><html lang="zh" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="zh" class="ie8"><![endif]-->
+<!--[if !IE]><!--><html lang="zh"><!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta content="all" name="robots" />
+    <meta name="keywords" content="前端规范,前端规范手册,日日顺前端规范手册,日日顺B2B官网前端规范手册" />
+    <meta name="description" content="本手册适用于日日顺B2B官网，包括HTML规范、CSS规范、JS规范、工程师规范，代码库等，B2B官网所需页面均应以此手册为准。" />
+    <meta name="author" content="http://www.365rrs.com-日日顺B2B官网" />
+    <meta name="viewport" content="width=device-width"/>
+    <title>日日顺B2B官网-前端规范手册</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="/csslib/ui/ui.css?v=20131212"/>
+    <!-- 单页样式 -->
+</head>
+<body data-nav="js-name">
+<!-- 头部 -->
+<div class="ui-g-header" data-in="in/header"></div>
+<!-- /头部 -->
+<!-- 主体 -->
+<div class="ui-g-section clearfix">
+    <!-- 左侧共用部分 -->
+    <div class="ui-g-side" data-in="in/left" id="j-ui-side"></div>
+    <!-- /左侧共用部分 -->
+    <!-- 右侧部分 -->
+    <div class="ui-g-article">
+        <div class="ui-g-main">
+            <div class="ui-m-article">
+                <h2 class="ui-u-title">
+                    JS规范 - 命名规范
+                </h2>
+                <dl>
+                    <dt>
+                        模块编写规范
+                    </dt>
+                    <dd>
+                        参照CMD规范。<a href="http://seajs.org/docs/#docs" target="_blank">http://seajs.org/docs/#docs</a>文档的模块编写规范。
+                    </dd>
+                    <dt>
+                        语言规范
+                    </dt>
+                    <dd>
+                        <p>变量：<br/>声明变量必须加上 var 关键字</p>
+                        <p>保留字：<br/>保留字以及特有的dom属性不能作为变量名，require、exports、module作为保留字</p>
+                        <p>分号：<br/>所有语句结束后，必须使用 ; 号结束</p>
+                        <p>逗号：<br/>数组成员间的","后面需要跟空格，例如[a, b, c, d]</p>
+                        <p>操作符：<br/>操作符前后各一英文空格，例如 if( i == 2 ) { }</p>
+                        <p>缩进：<br/>使用2个空格代替1个Tab（大多数编辑器中可设置） </p>
+                    </dd>
+                    <dt>
+                        变量命名规范
+                    </dt>
+                    <dd>
+                        <p>变量名包括全局变量，局部变量，类变量，函数参数等等，他们都属于这一类。<br/>
+                        变量命名都以类型前缀+有意义的单词组成，单词首字母都需要大写。例如：sUserName，nCount。<br/>
+                        某些不允许修改值的变量认为是常量，全部字母都大写，非常量不得全部字母大写。例如：TELPHONE，ADDRESS。常量可以存在于函数中，也可以存在于全局。
+                        </p>
+                        <p>
+                            每个变量都需要有一个类型前缀，按照类型可以分为：<br/>
+                            g：表示全局变量。例如：gUserName，gUserId；<br/>
+                            s：表示字符串。例如：sName，sHtml；<br/>
+                            n：表示数字。例如：nPage，nTotal；<br/>
+                            b：表示逻辑。例如：bChecked，bLogin；<br/>
+                            a：表示数组。例如：aList，aGroup；<br/>
+                            r：表示正则表达式。例如：rDomain，rEmail；<br/>
+                            f：表示函数。例如：fGetHtml，fInit；<br/>
+                            o：表示DOM Object。例如：oNewsList，oTest；<br/>
+                            $：表示jQuery DOM元素。例如：$ul，$test；<br/>
+                            _：表示以上未涉及到的其他对象，例如：_Button，_Date；<br/>
+                        </p>
+                    </dd>
+                    <dt>
+                        函数命名规范
+                    </dt>
+                    <dd>
+                        <p>统一使用动词或者动词[＋名词]形式，例如：fGetVersion ()，fSubmitForm ()，fInit ()；涉及返回逻辑值的函数可以使用 is，has 等表示逻辑的词语代替动词。</p>
+                        <p>如果有内部函数，使用__f+ 动词[+名词]形式（两个下划线，一个为其他变量），内部函数必需在函数最后定义。例如：</p>
+<pre class="brush:js">
+function fGetNumber (nTotal){
+    if(nTotal < 100){
+        nTotal = 100;
+    }
+    return __fAdd (nTotal);
+
+    function __fAdd (nNumber){
+        nNumber++;
+        return nNumber;
+    }
+}
+alert (fGetNumber (30));//alert 101
+</pre>
+                    </dd>
+                    <dt>
+                        其他注意事项
+                    </dt>
+                    <dd>
+                    <p>
+                        1：所有命名最好使用英语表示。<br/>
+                        2：所有变量名应该明确而必要，尽量避免不必要的容易混淆的缩写。<br/>
+                        3：尽量做有意义的代码折行，不要让一行代码过长。(HTML 字符串除外) <br/>
+                        4：对应的方法应该使用对应的动词，例如：get/set, add/remove, create/destroy， start/stop, insert/delete, begin/end。<br/>
+                        5：应该避免双重否定意义的变量，例如：bIsNotError, bIsNotFound，不可取。<br/>
+                        6：变量应该在最小的范围内定义，并尽可能的保持最少的活动时间。<br/>
+                        7：循环变量最好在循环中定义。例如 for (var i = 0, m = 10; i < m; i++){ do something}。<br/>
+                        8：尽量避免复杂的条件语句，可以使用临时的 boolean 变量代替。<br/>
+                        9：一定要避免在条件中执行语句，例如：if ((i=3)>2){}，不可取。<br/>
+                        10：不要在代码中重复使用相同意义的数字，用一个变量代替，比如 nTotal=100; num= total。
+                    </p>
+                    </dd>
+                    <dt>
+                        词法结构
+                    </dt>
+                    <dd>
+                        <p>1、普通代码段应该看起来如下：</p>
+<pre class="brush:js">
+function fCheckEmail(sEmail) {
+    if(typeof(sEmail) === "undefined"){
+        return false;
+    }
+    ....
+}
+</pre>
+                        <p>2、if 语句应该看起来像这样：</p>
+<pre class="brush:js">
+if(nType === 1){
+    doSomething;
+}elseif(nType === 2){
+    doSomething;
+}else{
+    doSomething;
+}
+</pre>
+                        <p>3、for 语句应该看起来像这样：</p>
+<pre class="brush:js">
+for(var i = 0, nList = aList.length; i &lt; nList; i++) {
+    doSomething;
+}
+</pre>
+                        <p>4、while 语句应该看起来像这样：</p>
+<pre class="brush:js">
+var nList = 0;
+while (nList &lt; 5) {
+    doSomething;
+    nList++;
+}
+</pre>
+                        <p>5、do ... while 语句应该看起来像这样：</p>
+<pre class="brush:js">
+var nList = 0;
+do {
+    doSomething;
+    nList++;
+} while (nList &lt; 5)
+</pre>
+                        <p>6、switch 语句应该看起来像这样：</p>
+<pre class="brush:js">
+switch(nType){
+    case 1:
+        doSomething;
+        break;
+    case 2:
+        doSomething;
+        break;
+    default:
+        doSomething;
+        break;
+}
+</pre>
+                        <p>7、try ... catch 语句应该看起来像这样：</p>
+<pre class="brush:js">
+try {
+    doSomething;// 此处是可能产生例外的语句
+}catch(ex) {
+    doSomething;// 此处是负责例外处理的语句
+}finally {
+    doSomething;// 此处是出口语句
+}
+</pre>
+                        <p>8、单行的 if ... else，while 或者 for 语句也必须加入括号：</p>
+<pre class="brush:js">
+if(nType === 1){ doSomething; }
+while(nType &lt; 5){ doSomething; }
+for(var i = 0, nList = aList.length; i &lt; nList; i++){ doSomething; }
+</pre>
+                    </dd>
+                    <dt>
+                        注释规范
+                    </dt>
+                    <dd>
+<pre class="brush:js">
+/************************************
+*@描述：方法描述
+*@家族：b2b
+*@名称：kx
+*@版本：1.0.0
+*@依赖关系：[jquery/jquery@1.10.1]
+*@说明：暂无
+************************************/
+</pre>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div class="ui-g-footer" data-in="in/footer"></div>
+        <!-- /底部 -->
+    </div>
+</div>
+<!-- /主体 -->
+<script src="/utils/sea.js?v=20131212" id="seajsnode"></script>
+<script src="/utils/sea-config.js?v=20131212"></script>
+<script type="text/javascript">
+    //单页JS代码
+    seajs.use(["jquery","c-ui"],function($,ui){
+        $("#js-html-code").find("a").bind("click",function(){
+            var _html = $(this).attr("data-html"),_to = $(this).attr("data-to");
+            ui.loadMsg(_html);
+            if(_to){
+                $(".aui_content").scrollTop(_to);
+            }
+        })
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="zh" class="ie ie6"><![endif]-->
+<!--[if IE 7]><html lang="zh" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="zh" class="ie8"><![endif]-->
+<!--[if !IE]><!--><html lang="zh"><!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta content="all" name="robots" />
+    <meta name="keywords" content="前端规范,前端规范手册,日日顺前端规范手册,日日顺B2B官网前端规范手册" />
+    <meta name="description" content="本手册适用于日日顺B2B官网，包括HTML规范、CSS规范、JS规范、工程师规范，代码库等，B2B官网所需页面均应以此手册为准。" />
+    <meta name="author" content="http://www.365rrs.com-日日顺B2B官网" />
+    <meta name="viewport" content="width=device-width"/>
+    <title>日日顺B2B官网-前端规范手册</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="/csslib/ui/ui.css?v=20131212"/>
+    <!-- 单页样式 -->
+</head>
+<body data-nav="css-error">
+<!-- 头部 -->
+<div class="ui-g-header" data-in="in/header"></div>
+<!-- /头部 -->
+<!-- 主体 -->
+<div class="ui-g-section clearfix">
+    <!-- 左侧共用部分 -->
+    <div class="ui-g-side" data-in="in/left" id="j-ui-side"></div>
+    <!-- /左侧共用部分 -->
+    <!-- 右侧部分 -->
+    <div class="ui-g-article">
+        <div class="ui-g-main">
+            <div class="ui-m-article">
+                <h2 class="ui-u-title">
+                    CSS规范 - 典型错误
+                </h2>
+                <dl>
+                    <dt>
+                        不符合NEC规范的选择器用法
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li>.class{}
+                                <p>
+                                    不要以一个没有类别的样式作为主选择器，这样的选择器只能作为后代选择器使用，比如.m-xxx .class{}。
+                                </p>
+                            </li>
+                            <li>.m-xxx div{}
+                                <p>
+                                    不要以没有语义的标签作为选择器，这会造成大面积污染，除非你可以断定现在或将来你的这个选择器不会污染其他同类。
+                                </p>
+                            </li>
+                            <li>.g-xxx .class{}
+                                <p>
+                                    不要在页面布局中使用后代选择器，因为这个后代选择器可能会污染里面的元素。
+                                </p>
+                            </li>
+                            <li>.g-xxx .m-yyy{}.g-xxx .u-yyy{}
+                                <p>
+                                    不要用布局去控制模块或元件，模块和元件应与布局分离独立。.ui-g-xxx .m-yyy{}.ui-g-xxx .u-yyy{}属于频道样式重写，不在此内。
+                                </p>
+                            </li>
+                            <li>.m-xxx .f-xxx{}.m-xxx .s-xxx{}
+                                <p>
+                                    不要通过模块或其他类来重定义或修改或添加已经定义好的功能类选择器和皮肤类选择器。
+                                </p>
+                            </li>
+                            <li>.m-xxx .class .class .class .class{}
+                                <p>
+                                    不要将选择器写的过于冗长，这会额外增加文件大小并且限制了太小范围的选择器，使树形结构过于严格应用范围过于局限，建议3-4个长度之内写完。
+                                </p>
+                                <p>
+                                    选择器并不需要完整反映结构嵌套顺序，相反，能简则简。
+                                </p>
+                            </li>
+                            <li>.m-xxx .m-yyy .zzz{}
+                                <p>
+                                    不要越级控制，如果.zzz是.m-yyy的后代选择器，那么不允许.m-yyy之外的选择器控制或修改.zzz。
+                                </p>
+                                <p>
+                                    此时可以使用.m-yyy的扩展来修改.zzz，比如.m-yyy-1 .zzz{}。
+                                </p>
+                            </li>
+                        </ul>
+                    </dd>
+                    <dt>
+                        扩展类使用错误
+                    </dt>
+                    <dd>
+                        <p>
+                            扩展类必须和其基类同时使用于同一个节点。
+                        </p>
+                        <ul>
+                            <li>错误：class="g-xxx g-yyy-1" class="m-xxx-1" class="u-xxx u-yyy-1" class="xxx-yyy"。
+                            </li>
+                            <li>正确：class="g-xxx g-xxx-1" class="m-xxx m-xxx-1" class="u-yyy u-yyy-1" class="xxx xxx-yyy"。
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div class="ui-g-footer" data-in="in/footer"></div>
+        <!-- /底部 -->
+    </div>
+</div>
+<!-- /主体 -->
+<script src="/utils/sea.js?v=20131212" id="seajsnode"></script>
+<script src="/utils/sea-config.js?v=20131212"></script>
+<script type="text/javascript">
+    //单页JS代码
+    seajs.use(["jquery","c-ui"],function($,ui){
+        $("#js-html-code").find("a").bind("click",function(){
+            var _html = $(this).attr("data-html"),_to = $(this).attr("data-to");
+            ui.loadMsg(_html);
+            if(_to){
+                $(".aui_content").scrollTop(_to);
+            }
+        })
+    });
+</script>
+</body>
+</html>

@@ -13,7 +13,9 @@
     <title>日日顺B2B官网-前端规范手册</title>
     <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
     <link type="text/css" rel="stylesheet" href="/csslib/ui/ui.css?v=20131212"/>
-    <!-- 单页样式 -->
+    <!-- 单页样式
+
+    <script type="text/javascript" src="utils/date97/WdatePicker.js?v=20131213"></script> -->
 </head>
 <body>
 <!-- 头部 -->
@@ -31,6 +33,18 @@
                 <h2 class="ui-u-title">
                     日日顺B2B官网-前端规范手册
                 </h2>
+                <input class="Wdate" type="text" value="" id="j-date">
+                <p>
+                    <label>Tags (local):</label>
+                    <input type="text" id='tags' />
+                    <input type="button" value="Get Value" />
+                </p>
+                <select class="chosen-select">
+                    <option value="">测试</option>
+                    <option value="">测试</option>
+                    <option value="">测试</option>
+                    <option value="">测试</option>
+                </select>
                 <dl>
                     <dt>前端规范是什么？</dt>
                     <dd>
@@ -38,7 +52,7 @@
                     </dd>
                     <dt>为什么需要制定前端规范？</dt>
                     <dd>
-                        <p>首先明确一点，规范并不是为了限制什么，而是为了提高协作效率而做出的一个约定。使用规范可以加强团队之间的合作，提高协作效率，从而形成一种团队文化。其最终目的是为项目服务，所做一切都是为了优化项目和流程，提高工作效率。</p>
+                        <p>首先明确一点，规范并不是为了限制什么，而是一个约定。使用规范可以加强团队之间的合作，提高协作效率，从而形成一种团队文化。其最终目的是为项目服务，所做一切都是为了优化项目和流程，提高工作效率。</p>
                         <ul>
                             <li>保持编码风格，注释风格一致，应用设计模式一致。</li>
                             <li>提高团队协作效率，便于后端工程师添加修改功能及前端工程师后期优化维护。</li>
@@ -54,7 +68,9 @@
             </div>
         </div>
         <!-- 底部 -->
-        <div class="ui-g-footer" data-in="in/footer"></div>
+        <div class="ui-g-footer" data-in="footer">
+            版权所有 &copy; 2013 - 2111 <a target="_blank" href="http://www.365rrs.com/">海尔<em class="f-st">&middot;</em>日日顺<em class="f-st">&middot;</em>B2B官网</a></div>
+        </div>
         <!-- /底部 -->
     </div>
 </div>
@@ -62,7 +78,15 @@
 <script src="/utils/sea.js?v=20131212" id="seajsnode"></script>
 <script src="/utils/sea-config.js?v=20131212"></script>
 <script type="text/javascript">
+    seajs.config({
+        alias: {
+            "o-autocomplete": "/csslib/o-autocomplete.css"
+        }
+    });
     //单页JS代码
+    var gBase = {
+        url :"/jslib"
+    }
     seajs.use("c-ui");
 </script>
 </body>

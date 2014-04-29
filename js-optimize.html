@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="zh" class="ie ie6"><![endif]-->
+<!--[if IE 7]><html lang="zh" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="zh" class="ie8"><![endif]-->
+<!--[if !IE]><!--><html lang="zh"><!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta content="all" name="robots" />
+    <meta name="keywords" content="前端规范,前端规范手册,日日顺前端规范手册,日日顺B2B官网前端规范手册" />
+    <meta name="description" content="本手册适用于日日顺B2B官网，包括HTML规范、CSS规范、JS规范、工程师规范，代码库等，B2B官网所需页面均应以此手册为准。" />
+    <meta name="author" content="http://www.365rrs.com-日日顺B2B官网" />
+    <meta name="viewport" content="width=device-width"/>
+    <title>日日顺B2B官网-前端规范手册</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="/csslib/ui/ui.css?v=20131212"/>
+    <!-- 单页样式 -->
+</head>
+<body data-nav="js-optimize">
+<!-- 头部 -->
+<div class="ui-g-header" data-in="in/header"></div>
+<!-- /头部 -->
+<!-- 主体 -->
+<div class="ui-g-section clearfix">
+    <!-- 左侧共用部分 -->
+    <div class="ui-g-side" data-in="in/left" id="j-ui-side"></div>
+    <!-- /左侧共用部分 -->
+    <!-- 右侧部分 -->
+    <div class="ui-g-article">
+        <div class="ui-g-main">
+            <div class="ui-m-article">
+                <h2 class="ui-u-title">
+                    JS规范 - 性能优化
+                </h2>
+                <dl>
+                    <dt>
+                        压缩合并JS
+                    </dt>
+                    <dd>
+                        <p>
+                            整体采用seajs，压缩合并JS统一为rrs build进行构建，从而实现合并压缩，减少HTTP请求。
+                        </p>
+                    </dd>
+                    <dt>
+                        按需加载JS及利用共用模块缓存
+                    </dt>
+                    <dd>
+                        <p>
+                            在入口JS文件中，需要注意按需加载模块。比如顶部搜索框获取焦点后自动完成。
+<pre class="brush:js">
+    //错误示例
+    var _autoComplete = require("./mod/autoComplete");
+    $("j-search").on("focus",function(){
+        ...
+    });
+
+    //正确示例
+    $("j-search").on("focus",function(){
+        var _autoComplete = require("./mod/autoComplete");
+        ...
+    })
+</pre>
+                            另外，由于顶部搜索框位于网站顶部，全站共用，此时我们可以将其放入基础JS(base/base.js)中，方便下次浏览时可直接读取浏览器缓存。
+<pre class="brush:js">
+    var b2b = require("base");
+    $("j-search").on("focus",function(){
+        var _autoComplete = b2b.autoComplete;
+        ...
+    })
+</pre>
+                        <strong>注意：按需加载及共用模块需根据具体需求进行区分，以便达到更好的效率。</strong><br/>
+                        比如：顶部搜索全站共用，可将其放入基础JS中。而产品分类树则在产品模块中出现，可将其放入产品频道或将其独立为插件按需使用。
+                        </p>
+                    </dd>
+                    <dt>总是从ID选择器开始继承</dt>
+                    <dd>在jquery中最快的选择器是ID选择器. 因为它直接来自于Javascript的getElementById()方法.
+<pre class="brush:js">
+&lt;div class="m-news" id="j-news"&gt;
+    &lt;h2&gt;news catagory name&lt;/h2&gt;
+    &lt;ul class="newsList" id="j-newsList"&gt;
+        &lt;li&gt;&lt;a href="/"&gt;news title&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/"&gt;news title&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/"&gt;news title&lt;/a&gt;&lt;/li&gt;
+        ...
+    &lt;/ul&gt;
+    &lt;div class="m-pages j-pages"&gt;
+        ...
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                        像这样选择是低效的:<br/>
+                        var $newsList = $("#j-news .newslist");<br/>
+                        用ID直接选择效率更高:<br/>
+                        var $newsList = $("j-newsList");<br/>
+                        选择多个元素<br/>
+                        提到多元素选择其实是在说DOM遍历和循环, 这些都是比较慢的东西。为了提高性能, 最好从就近的ID开始继承。
+                        var $newsListLi = $("#j-newsList").find("li");
+                    </dd>
+                    <dt>在class前使用tag</dt>
+                    <dd>第二快的选择器是tag选择器($("head"))，同理,因为它来自原生的getElementsByTagName() 方法。<br/>
+                    上例中<br/>
+                    总是用一个tag name来限制(修饰)class (并且不要忘记就近的ID):<br/>
+                    var $pages = $("#j-news > div.j-pages");<br/>
+                    注意: <strong>在jquery中Class是最慢的选择器。</strong>IE浏览器下它会遍历所有DOM节点不管它用在那里。<br/>
+                    不要用用tag name来修饰ID。
+                    下面的例子将会遍历所有的div元素来查找id为"content"的那个节点:<br/>
+                    var $newsList = $("div#content");<br/>
+                    用ID修饰ID也是画蛇添足：<br/>
+                    var $newsList = $("#j-news #j-newsList");
+                    </dd>
+                    <dt>将jquery对象缓存起来，并尽可能使用链式操作</dt>
+                    <dd>
+                        要养成将jquery对象缓存进变量的习惯。<br/>
+                        永远不要这样做：<br/>
+<pre class="brush:js">
+$("#j-newsList").find("li").bind("click", function(){…});
+$("#j-newsList").find("li").css("border", "3px dashed yellow");
+$("#j-newsList").find("li").css("background-color", "green");
+$("#j-newsList").find("li").fadeIn("slow");
+</pre>
+                        最好先将对象缓存进一个变量然后再操作，如果中间没有其他操作，应将其链式操作:
+<pre class="brush:js">
+var $newsListLi =  $("#j-newsList").find("li");
+$newsListLi.bind("click", function(){…})
+           .css("border", "3px dashed yellow")
+           .css("background-color", "green")
+           .fadeIn("slow");
+</pre>
+                        为了记住我们本地变量是jquery的封装，通常用一个$作为变量前缀。详见<a href="js-name.html">命名规范</a>。记住，永远不要让相同的选择器在你的代码里出现多次。
+                    </dd>
+                    <dt>采用find，而不使用上下文查找</dt>
+                    <dd>在大量DOM内，.find()函数会稍微快些。</dd>
+                    <dt>使用子查询</dt>
+                    <dd>jQuery 允许我们对一个已包装的对象使用附加的选择器操作。因为我们已经在保存了一个父级对象在变量里, 这样大大提高对其子元素的操作:
+<pre class="brush:js">
+var $newsList =  $("#j-newsList"),$newsListLi = $newsList.find("li");
+</pre>
+                    </dd>
+                    <dt>对直接的DOM操作进行限制</dt>
+                    <dd>请注意，直接的DOM操作会造成执行效率慢。比如你想动态的创建一组列表元素。
+<pre class="brush:js">
+var aData = ["data1", "data2", ...] //列表数据
+
+//错误示例，千万不要这样做
+var $newsList =  $("#j-newsList");
+for (var i = 0, l = aData.length; i &lt; l; i++){
+    $newsList.append('&lt;li&gt;' + aData[i] + '&lt;/li&gt;');
+}
+
+//我们应该在操作DOM前全部创建好整个元素字符串:
+//正确示例
+var sHtml = "";
+for (var i = 0, l = aData.length; i &lt; l; i++){
+    sHtml += '&lt;li&gt;' + aData[i] + '&lt;/li&gt;';
+}
+$newsList.append(sHtml);
+</pre>
+                    </dd>
+                    <dt>冒泡</dt>
+                    <dd>除非在特殊情况下， 否则每一个js事件(例如:click， mouseover 等.)都会冒泡到父级节点。 当我们需要给多个元素调用同个函数时这点会很有用。<br/>代替这种效率很差的多元素事件监听的方法就是， 你只需向它们的父节点绑定一次，并且可以计算出哪个节点触发了事件。<br/>
+                    比如，上例中获取列表的文本内容。
+<pre class="brush:js">
+//注意，此处有多少li就绑定了多少次
+$("#j-newsList").find("li").on("click",function(){
+    console.log($(this).text());
+});
+
+//利用冒泡机制
+$("#j-newsList").on("click",function(e){
+    console.log($(e.target).text());//如有其他操作可将$(e.target)缓存起来使用
+});
+</pre>
+                    </dd>
+                    <dt>采用内部函数data()来存储状态</dt>
+                    <dd>不要忘记采用.data()函数来存储信息。</dd>
+                    <dt>尽管jQuery不会抛出异常，但也应该检查对象</dt>
+                    <dd>尽管jQuery不会抛出大量的异常给用户，但是开发者也不要依赖于此。jQuery通常会执行了一大堆没用的函数之后才确定一个对象是否存在。所以在对一系列引用之前，应先检查一下这个对象存不存在。</dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div class="ui-g-footer" data-in="in/footer"></div>
+        <!-- /底部 -->
+    </div>
+</div>
+<!-- /主体 -->
+<script src="/utils/sea.js?v=20131212" id="seajsnode"></script>
+<script src="/utils/sea-config.js?v=20131212"></script>
+<script type="text/javascript">
+    //单页JS代码
+    seajs.use(["jquery","c-ui"],function($,ui){
+        $("#js-html-code").find("a").bind("click",function(){
+            var _html = $(this).attr("data-html"),_to = $(this).attr("data-to");
+            ui.loadMsg(_html);
+            if(_to){
+                $(".aui_content").scrollTop(_to);
+            }
+        })
+    });
+</script>
+</body>
+</html>

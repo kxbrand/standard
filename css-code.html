@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="zh" class="ie ie6"><![endif]-->
+<!--[if IE 7]><html lang="zh" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="zh" class="ie8"><![endif]-->
+<!--[if !IE]><!--><html lang="zh"><!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta content="all" name="robots" />
+    <meta name="keywords" content="前端规范,前端规范手册,日日顺前端规范手册,日日顺B2B官网前端规范手册" />
+    <meta name="description" content="本手册适用于日日顺B2B官网，包括HTML规范、CSS规范、JS规范、工程师规范，代码库等，B2B官网所需页面均应以此手册为准。" />
+    <meta name="author" content="http://www.365rrs.com-日日顺B2B官网" />
+    <meta name="viewport" content="width=device-width"/>
+    <title>日日顺B2B官网-前端规范手册</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="/csslib/ui/ui.css?v=20131212"/>
+    <!-- 单页样式 -->
+</head>
+<body data-nav="css-code">
+<!-- 头部 -->
+<div class="ui-g-header" data-in="in/header"></div>
+<!-- /头部 -->
+<!-- 主体 -->
+<div class="ui-g-section clearfix">
+    <!-- 左侧共用部分 -->
+    <div class="ui-g-side" data-in="in/left" id="j-ui-side"></div>
+    <!-- /左侧共用部分 -->
+    <!-- 右侧部分 -->
+    <div class="ui-g-article">
+        <div class="ui-g-main">
+            <div class="ui-m-article">
+                <h2 class="ui-u-title">
+                    CSS规范 - 代码格式
+                </h2>
+                <dl>
+                    <dt>
+                        CSS预处理器
+                    </dt>
+                    <dd>
+                        <p>
+                            在项目中，尽可能的使用CSS预处理器，建议使用LESS，<a href="http://www.lesscss.net" target="_blank">参见官网</a>。<br/>入口文件以@import引入模块。
+                        </p>
+<pre class="brush:css">
+@import url(../mod/less.less);
+@import url(../mod/reset.less);
+@import url(../mod/function.less);
+@import url(../mod/grid.less);
+@import url(../mod/module.less);
+@import url(../mod/unit.less);
+@import url(../mod/skin.less);
+@import url(../mod/icon.less);
+@import url(login.less);
+</pre>
+                    </dd>
+                    <dt>
+                        选择器、属性和值都使用小写
+                    </dt>
+                    <dd>
+                        <p>
+                            在xhtml标准中规定了所有标签、属性和值都小写，CSS也是如此。
+                        </p>
+                    </dd>
+                    <dt>
+                        选择器书写规范
+                    </dt>
+                    <dd>
+                        <p>
+                            可以写成单行，或者多行，但是整个文件的排版必须统一。如果是在html中写内联的css，则必须写成单行。<br/>
+                            因建议使用CSS预处理器LESS，所以最好是写成单行，这样便于选择器的寻找和阅读，也便于插入新选择器和编辑，便于模块识别等。
+                        </p>
+                        <p>
+                            如果有嵌套定义，可以采取内部单行的形式。
+                        </p>
+<pre class="brush:css">
+/* 单行定义一个选择器 */
+.m-list li,.m-list h3{width:100px;padding:10px;border:1px solid #ddd;}
+/* 这是一个有嵌套定义的选择器 */
+@media all and (max-width:600px){
+    .m-class1 .itm{height:17px;line-height:17px;font-size:12px;}
+    .m-class2 .itm{width:100px;overflow:hidden;}
+}
+@-webkit-keyframes showitm{
+    0%{height:0;opacity:0;}
+    100%{height:100px;opacity:1;}
+}
+</pre>
+                    </dd>
+                    <dt>
+                        最后一个值也以分号结尾
+                    </dt>
+                    <dd>
+                        <p>
+                            通常在大括号结束前的值可以省略分号，但是这样做会对修改、添加和维护工作带来不必要的失误和麻烦。所以源文件最后一个值也以分号结尾，压缩上线后可以忽略。
+                        </p>
+                    </dd>
+                    <dt>
+                        使用单引号
+                    </dt>
+                    <dd>
+                        <p>
+                            省略url引用中的引号，其他需要引号的地方使用单引号。
+                        </p>
+<pre class="brush:css">
+.m-box{background:url(bg.png);}
+.m-box:after{content:'.';}
+</pre>
+                    </dd>
+                    <dt>
+                        base.less
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li>将网站所用颜色色值统一放入base.less文件中，便于统一调用。</li>
+                            <li>宽度尽可能利用LESS的内部运算实现。</li>
+                            <li>将一些常用样式放入此文件，例如.radius，.boxshadow等</li>
+                            <li>本文件不出现具体样式。</li>
+                        </ul>
+<pre class="brush:css">
+@red:#f1453a;
+@gray:#666;
+@gray3:#333;
+@gray5:#555;
+@gray6:#666;
+@gray9:#999;
+@width:1000px;
+@width1:1000px - 200;
+.radius(@radius: 5px){border-radius:@radius;-moz-border-radius: @radius;-webkit-border-radius: @radius;}
+.boxshadow(@x:0,@y:0,@blur:1px,@color:rgba(51,51,51,0.5)){box-shadow: @arguments;-moz-box-shadow: @arguments;-webkit-box-shadow: @arguments;}
+</pre>
+                    </dd>
+                    <dt>
+                        私有在前，标准在后
+                    </dt>
+                    <dd>
+                        <p>
+                            先写带有浏览器私有标志的，后写W3C标准的。
+                        </p>
+                    </dd>
+                    <dt>
+                        注释格式：/* 注释文字 */
+                    </dt>
+                    <dd>
+                        <p>
+                            对选择器的注释统一写在被注释对象的上一行，对属性及值的注释写于分号后。
+                        </p>
+                        <p>
+                            注释内容两端需空格，已确保即使在编码错误的情况下也可以正确解析样式。
+                        </p>
+                        <p>
+                            在必要的情况下，可以使用块状注释，块状注释保持统一的缩进对齐。
+                        </p>
+                        <p>
+                            原则上每个系列的样式都需要有一个注释，言简意赅的表明名称、用途、注意事项等。
+                        </p>
+<pre class="brush:css">
+/* 块状注释文字
+ * 块状注释文字
+ * 块状注释文字
+ */
+.m-list{width:500px;}
+.m-list li{height:20px;line-height:20px;/* 这里是对line-height的一个注释 */overflow:hidden;}
+.m-list li a{color:#333;}
+/* 单行注释文字 */
+.m-list li em{color:#666;}
+</pre>
+                    </dd>
+                    <dt>
+                        原则上不允许使用Hack
+                    </dt>
+                    <dd>
+                        <p>
+                            很多不兼容问题可以通过改变方法和思路来解决，并非一定需要Hack，根据经验你完全可以绕过某些兼容问题。
+                        </p>
+                        <p>
+                            一种合理的结构和合理的样式，是极少会碰到兼容问题的。
+                        </p>
+                        <p>
+                            由于浏览器自身缺陷，我们无法避开的时候，可以允许使用适当的Hack。
+                        </p>
+                    </dd>
+                    <dt>
+                        统一Hack方法
+                    </dt>
+                    <dd>
+                        <p>
+                            统一使用“\9”、“\0”、“*”和“_”分别对IE、IE8、IE7和IE6进行Hack。先标准浏览器，然后再分别是相应Hack。如下代码所示：
+                        </p>
+<pre class="brush:css">
+/* IE9会显示红色#f00，IE8会显示为#333，IE7会显示灰色#888，IE6会显示白色#fff，其他浏览器显示黑色#000 */
+.m-list{color:#000;color:#f00\9;color:#333\0;*color:#888;_color:#fff;}
+</pre>
+                    </dd>
+                    <dt>
+                        建议并适当缩写值
+                    </dt>
+                    <dd>
+                        <p>
+                            “建议并适当”是因为缩写总是会包含一系列的值，而有时候我们并不希望设置某一值，反而造成了麻烦，那么这时候你可以不缩写，而是分开写。
+                        </p>
+                        <p>
+                            当然，在一切可以缩写的情况下，请务必缩写，它最大的好处就是节省了字节，便于维护，并使阅读更加一目了然。
+                        </p>
+                        <p>
+                            缩写方法请查阅css手册。
+                        </p>
+                    </dd>
+                    <dt>
+                        选择器顺序
+                    </dt>
+                    <dd>
+                        <p>
+                            请综合考虑以下顺序依据：
+                        </p>
+                        <ul>
+                            <li>从大到小（以选择器的范围为准）
+                            </li>
+                            <li>从低到高（以等级上的高低为准）
+                            </li>
+                            <li>从先到后（以结构上的先后为准）
+                            </li>
+                            <li>从父到子（以结构上的嵌套为准）
+                            </li>
+                        </ul>
+                        <p>
+                            以下仅为简单示范：
+                        </p>
+<pre class="brush:css">
+/* 从大到小 */
+.m-list p{margin:0;padding:0;}
+.m-list p.part{margin:1px;padding:1px;}
+/* 从低到高 */
+.m-logo a{color:#f00;}
+.m-logo a:hover{color:#fff;}
+/* 从先到后 */
+.g-hd{height:60px;}
+.g-bd{height:60px;}
+.g-ft{height:60px;}
+/* 从父到子 */
+.m-list{width:300px;}
+.m-list .itm{float:left;}
+</pre>
+                    </dd>
+                    <dt>
+                        z-index取值范围
+                    </dt>
+                    <dd>
+                        <p>
+                            如果z-index取值随意，极有可能造成相互覆盖，存在潜在问题风险，特规定z-index取值范围（特殊需求可除外）。
+                        </p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        头部导航区域
+                                    </th>
+                                    <td>
+                                        [1999 - 2100]
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        页面主要内容区域
+                                    </th>
+                                    <td>
+                                        [-1 - 1997]
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        页面底部
+                                    </th>
+                                    <td>
+                                        [1999 - 2100]
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        全站公共组件
+                                    </th>
+                                    <td>
+                                        [-1 - 1999]
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        全页面蒙层弹窗组件
+                                    </th>
+                                    <td>
+                                        [10000-11000]
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                    <dt>
+                        选择器等级
+                    </dt>
+                    <dd>
+                        <p>
+                            a = 行内样式style。
+                        </p>
+                        <p>
+                            b = ID选择器的数量。
+                        </p>
+                        <p>
+                            c = 类、伪类和属性选择器的数量。
+                        </p>
+                        <p>
+                            d = 类型选择器和伪元素选择器的数量。
+                        </p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        选择器
+                                    </th>
+                                    <th>
+                                        等级(a,b,c,d)
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        style=""
+                                    </td>
+                                    <td>
+                                        1,0,0,0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        #wrapper #content {}
+                                    </td>
+                                    <td>
+                                        0,2,0,0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        #content .dateposted {}
+                                    </td>
+                                    <td>
+                                        0,1,1,0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        div#content {}
+                                    </td>
+                                    <td>
+                                        0,1,0,1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        #content p {}
+                                    </td>
+                                    <td>
+                                        0,1,0,1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        #content {}
+                                    </td>
+                                    <td>
+                                        0,1,0,0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        p.comment .dateposted {}
+                                    </td>
+                                    <td>
+                                        0,0,2,1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        div.comment p {}
+                                    </td>
+                                    <td>
+                                        0,0,1,2
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        .comment p {}
+                                    </td>
+                                    <td>
+                                        0,0,1,1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        p.comment {}
+                                    </td>
+                                    <td>
+                                        0,0,1,1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        .comment {}
+                                    </td>
+                                    <td>
+                                        0,0,1,0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        div p {}
+                                    </td>
+                                    <td>
+                                        0,0,0,2
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        p {}
+                                    </td>
+                                    <td>
+                                        0,0,0,1
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div class="ui-g-footer" data-in="in/footer"></div>
+        <!-- /底部 -->
+    </div>
+</div>
+<!-- /主体 -->
+<script src="/utils/sea.js?v=20131212" id="seajsnode"></script>
+<script src="/utils/sea-config.js?v=20131212"></script>
+<script type="text/javascript">
+    //单页JS代码
+    seajs.use(["jquery","c-ui"],function($,ui){
+        $("#js-html-code").find("a").bind("click",function(){
+            var _html = $(this).attr("data-html"),_to = $(this).attr("data-to");
+            ui.loadMsg(_html);
+            if(_to){
+                $(".aui_content").scrollTop(_to);
+            }
+        })
+    });
+</script>
+</body>
+</html>
