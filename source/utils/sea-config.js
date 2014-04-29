@@ -3,11 +3,11 @@
 *@说明：http://www.seajs.org
 ************************************/
 seajs.config({
-  base: "/jslib",
+  base: "/pub/jslib",
   paths: {
-    'p-c':'/csslib',
-    'p-u':'/utils',
-    'p-kx':'b2b/kx'
+    'p-c':'/pub/csslib',
+    'p-u':'/pub/utils',
+    'p-kx':'/pub/b2b/kx'
   },
   alias: {
     "jquery": "plugins/jquery/jquery/1.10.1/jquery.js",

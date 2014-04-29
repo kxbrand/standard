@@ -100,7 +100,7 @@ rrs cssmin
 .g-hd:after,.g-bd:after,.g-ft:after{display:block;visibility:hidden;clear:both;height:0;content:".";}
 .g-hd,.g-bd,.g-ft{zoom:1;}
 /* 通常background总是会占用很多字节，所以一般情况下，我们都会这样统一调用 */
-.m-logo,.m-help,.m-list li,.u-tab li,.u-tab li a{background:url(../images/sprite.png) no-repeat 9999px 9999px;}
+.m-logo,.m-help,.m-list li,.u-tab li,.u-tab li a{background:url(../pub/images/sprite.png) no-repeat 9999px 9999px;}
 .m-logo{background-position:0 0;}
 /* 以下是某个元件的写法，因为确实很多元素是联动的或相关的，所以采用了组合写法，可以方便理解和修改 */
 .u-tab li,.u-tab li a{display:inline;float:left;height:30px;line-height:30px;}
@@ -220,8 +220,8 @@ rrs cssmin
     </div>
 </div>
 <!-- /主体 -->
-<script src="/pub/jslib/sea.js?v=20131212" id="seajsnode"></script>
-<script src="/pub/jslib/sea-config.js?v=20131212"></script>
+<script src="/pub/utils/sea.js?v=20131212" id="seajsnode"></script>
+<script src="/pub/utils/sea-config.js?v=20131212"></script>
 <script type="text/javascript">
     //单页JS代码
     seajs.use(["jquery","c-ui"],function($,ui){

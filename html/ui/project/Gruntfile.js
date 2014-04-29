@@ -148,7 +148,7 @@ module.exports = function(grunt) {
                 files: ['html/**/*.html']
             //},
             //images: {
-            //    files: ['source/images/**/*.{png,jpg,gif}'],
+            //    files: ['source/pub/images/**/*.{png,jpg,gif}'],
             //    tasks: ['imagemin']
             }
         },
