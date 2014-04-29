@@ -1,0 +1,2 @@
+/*!kxbrand(http://www.kxbrand.net)-11-04-2014 */
+define(function(a,b){function c(){this.regexList=[{regex:/^\+\+\+ .*$/gm,css:"color2"},{regex:/^\-\-\- .*$/gm,css:"color2"},{regex:/^\s.*$/gm,css:"color1"},{regex:/^@@.*@@.*$/gm,css:"variable"},{regex:/^\+.*$/gm,css:"string"},{regex:/^\-.*$/gm,css:"color3"}]}var d=a("./shCore").SyntaxHighlighter;c.prototype=new d.Highlighter,c.aliases=["diff","patch"],d.brushes.Diff=c,b.Brush=c});

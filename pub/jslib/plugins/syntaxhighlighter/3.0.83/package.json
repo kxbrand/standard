@@ -1,0 +1,33 @@
+{
+  "family": "kxbrand",
+  "name": "syntaxhighlighter",
+  "version": "3.0.83",
+  "description": "SyntaxHighlighter 是一套在浏览器上对各种代码进行语法着色的独立 JavaScript 库；已修正JAVA多行注释BUG；",
+  "homepage": "https://github.com/alexgorbatchev/syntaxhighlighter",
+  "author": "alexgorbatchev",
+  "maintainers": [
+    "alexgorbatchev",
+    "kxbrand"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexgorbatchev/syntaxhighlighter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexgorbatchev/syntaxhighlighter/issues"
+  },
+  "keywords": ["kxbrand","syntaxhighlighter","alexgorbatchev","javascript","语法高亮","语法着色"],
+  "licenses": "MIT",
+  "spm": {
+    "source":"syntaxhighlighter",
+    "output": [
+      "syntaxhighlighter.js",
+      "o-syntaxhighlighter.css"
+    ],
+    "alias": {
+      "o-syntaxhighlighter":"o-syntaxhighlighter"
+    },
+    "devAlias": {},
+    "engines": {}
+  }
+}

@@ -1,0 +1,2 @@
+/*!kxbrand(http://www.kxbrand.net)-11-04-2014 */
+define(function(a,b){function c(){}var d=a("./shCore").SyntaxHighlighter;c.prototype=new d.Highlighter,c.aliases=["text","plain"],d.brushes.Plain=c,b.Brush=c});

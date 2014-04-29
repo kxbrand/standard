@@ -1,0 +1,35 @@
+define(function(require, exports, module) {
+  require('css-syntaxhighlighter');
+  var sh = require('./shCore').SyntaxHighlighter;
+  require('./shBrushAppleScript');
+  require('./shBrushAS3');
+  require('./shBrushBash');
+  require('./shBrushColdFusion');
+  require('./shBrushCpp');
+  require('./shBrushCSharp');
+  require('./shBrushCss');
+  require('./shBrushDelphi');
+  require('./shBrushDiff');
+  require('./shBrushErlang');
+  require('./shBrushGroovy');
+  require('./shBrushHaxe');
+  require('./shBrushJava');
+  require('./shBrushJavaFX');
+  require('./shBrushJScript');
+  require('./shBrushPerl');
+  require('./shBrushPhp');
+  require('./shBrushPlain');
+  require('./shBrushPowerShell');
+  require('./shBrushPython');
+  require('./shBrushRuby');
+  require('./shBrushSass');
+  require('./shBrushScala');
+  require('./shBrushSql');
+  require('./shBrushTAP');
+  require('./shBrushTypeScript');
+  require('./shBrushVb');
+  require('./shBrushXml');
+
+  //sh.all();
+  module.exports = sh;
+});
