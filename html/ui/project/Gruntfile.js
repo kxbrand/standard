@@ -46,9 +46,9 @@ module.exports = function(grunt) {
             allutils:{
                 files: [{
                     expand: true,
-                    cwd: 'pub/utils/<%= pkg.config.grunt.utilsfolder %>',
+                    cwd: 'pub/pub/jslib/<%= pkg.config.grunt.utilsfolder %>',
                     src: '**/*.js',
-                    dest: 'pub/utils/<%= pkg.config.grunt.utilsfolder %>'
+                    dest: 'pub/pub/jslib/<%= pkg.config.grunt.utilsfolder %>'
                 }]
             },
             allplugins:{
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            files: ['Gruntfile.js','source/jslib/<%= pkg.config.grunt.jsfolder %>/**/*.js','!source/jslib/plugins/**/*.js','!source/utils/**/*.js'],
+            files: ['Gruntfile.js','source/jslib/<%= pkg.config.grunt.jsfolder %>/**/*.js','!source/jslib/plugins/**/*.js','!source/pub/jslib/**/*.js'],
             options: {
                 globals: {
                     jQuery: true,
@@ -86,9 +86,9 @@ module.exports = function(grunt) {
             allutils:{
                 files: [{
                     expand: true,
-                    cwd: 'pub/utils/<%= pkg.config.grunt.utilsfolder %>',
+                    cwd: 'pub/pub/jslib/<%= pkg.config.grunt.utilsfolder %>',
                     src: '**/*.css',
-                    dest: 'pub/utils/<%= pkg.config.grunt.utilsfolder %>'
+                    dest: 'pub/pub/jslib/<%= pkg.config.grunt.utilsfolder %>'
                 }]
             },
             allplugins:{
@@ -102,9 +102,9 @@ module.exports = function(grunt) {
             allcss: {
                 files: [{
                     expand: true,
-                    cwd: 'source/csslib/<%= pkg.config.grunt.cssfolder %>',
+                    cwd: 'source/pub/csslib/<%= pkg.config.grunt.cssfolder %>',
                     src: ['**/*.css','!mod/*.css'],
-                    dest: 'pub/csslib/<%= pkg.config.grunt.cssfolder %>'
+                    dest: 'pub/pub/csslib/<%= pkg.config.grunt.cssfolder %>'
                 }]
             }
         },
@@ -125,9 +125,9 @@ module.exports = function(grunt) {
             allless: {
                 files: [{
                     expand: true,
-                    cwd: 'source/csslib',
+                    cwd: 'source/pub/csslib',
                     src: ['**/*.less','!mod/*.less'],
-                    dest: 'source/csslib',
+                    dest: 'source/pub/csslib',
                     ext: '.css'
                 }]
             }
@@ -137,11 +137,11 @@ module.exports = function(grunt) {
                 livereload:true
             },
             js: {
-                files: ['source/jslib/**/*.js','!source/jslib/plugins/**/*.js','!source/utils/**/*.js'],
+                files: ['source/jslib/**/*.js','!source/jslib/plugins/**/*.js','!source/pub/jslib/**/*.js'],
                 tasks: ['jshint']
             },
             css: {
-                files: ['source/csslib/**/*.less'],
+                files: ['source/pub/csslib/**/*.less'],
                 tasks: ['less']
             },
             html: {
@@ -156,9 +156,9 @@ module.exports = function(grunt) {
             allutils: {
                 files: [{
                     expand: true,
-                    cwd: 'source/utils/<%= pkg.config.grunt.utilsfolder %>',
+                    cwd: 'source/pub/jslib/<%= pkg.config.grunt.utilsfolder %>',
                     src: '**/*.*',
-                    dest: 'pub/utils/<%= pkg.config.grunt.utilsfolder %>'
+                    dest: 'pub/pub/jslib/<%= pkg.config.grunt.utilsfolder %>'
                 }]
             },
             allplugins: {

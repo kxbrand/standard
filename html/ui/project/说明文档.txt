@@ -4,13 +4,13 @@
 3、rewrite配置：
 
   开发环境：
-  rewrite ^/utils/(.*)$ /source/utils/$1 last;
+  rewrite ^/pub/jslib/(.*)$ /source/pub/jslib/$1 last;
   rewrite ^/jslib/(.*)$ /source/jslib/$1 last;
-  rewrite ^/csslib/(.*)$ /source/csslib/$1 last;
+  rewrite ^/pub/csslib/(.*)$ /source/pub/csslib/$1 last;
   rewrite ^/images/(.*)$ /pub/images/$1 last;
 
   发布环境：
-  rewrite ^/utils/(.*)$ /pub/utils/$1 last;
+  rewrite ^/pub/jslib/(.*)$ /pub/pub/jslib/$1 last;
   rewrite ^/jslib/(.*)$ /pub/jslib/$1 last;
-  rewrite ^/csslib/(.*)$ /pub/csslib/$1 last;
+  rewrite ^/pub/csslib/(.*)$ /pub/pub/csslib/$1 last;
   rewrite ^/images/(.*)$ /pub/images/$1 last;

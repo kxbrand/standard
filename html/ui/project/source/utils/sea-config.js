@@ -5,7 +5,7 @@
 seajs.config({
   base: "/jslib",
   paths: {
-    'p-c':'/csslib',
+    'p-c':'/pub/csslib',
     'p-u':'/utils',
     'p-kx':'b2b/kx'
   },
