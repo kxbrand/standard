@@ -20,7 +20,7 @@ define(function(require, exports, module) {
 										{ name:"......"}
 									]
 								},
-								{ name:"频道或模块文件夹或其他文件夹，请更名", icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"}
+								{ name:"频道或模块文件夹或其他文件夹，请更名", icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"}
 							]
 						},
 						{ name:"jslib（项目JS源文件夹，开发过程用jshint进行检测）",
@@ -39,12 +39,12 @@ define(function(require, exports, module) {
 								{ name:"plugins（插件样式文件夹，可根据实际需要，从SVN库中获取并修改，一个插件一个文件夹，可用alias进行引用或打包）",
 									open:false,
 									children:[
-										{ name:"artdialog（弹出层样式）", icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"},
-										{ name:"chosen（美化下拉框样式）", icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"},
-										{ name:"......", icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"}
+										{ name:"artdialog（弹出层样式）", icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"},
+										{ name:"chosen（美化下拉框样式）", icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"},
+										{ name:"......", icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"}
 									]
 								},
-								{ name:"频道或模块文件夹或其他文件夹，请更名", icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"}
+								{ name:"频道或模块文件夹或其他文件夹，请更名", icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"}
 							]
 						},
 						{ name:"utils（外部非CMD模块JS源文件夹，可直接引用）",
@@ -57,9 +57,9 @@ define(function(require, exports, module) {
 						{ name:"other（其他文件夹，插件的API文档等）",
 							open:false,
 							children: [
-								{ name:"artdialog（弹出层样式）", icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"},
-								{ name:"chosen（美化下拉框样式）", icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"},
-								{ name:"......", icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"}
+								{ name:"artdialog（弹出层样式）", icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"},
+								{ name:"chosen（美化下拉框样式）", icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"},
+								{ name:"......", icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"}
 							]
 						}
 					]
@@ -71,10 +71,10 @@ define(function(require, exports, module) {
 						  open:false,
 						  children: [
 							{ name:"t.gif（1px*1px透明gif图片）"},
-							{ name:"common（全局图片）",icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"},
-							{ name:"psd（PSD源文件）",icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"},
-							{ name:"test（测试图片）",icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"},
-							{ name:"...（各频道所用图片）",icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"}
+							{ name:"common（全局图片）",icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"},
+							{ name:"psd（PSD源文件）",icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"},
+							{ name:"test（测试图片）",icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"},
+							{ name:"...（各频道所用图片）",icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"}
 						  ]
 						},
 						{ name:"...（其他文件夹，文件夹与文件的结构(名称)必须与源文件夹保持一致(mod除外)）"}
@@ -85,7 +85,7 @@ define(function(require, exports, module) {
 					children: [
 						{ name:"template.html（默认模板文件，新建页面以此为准）"},
 						{ name:"页面文件.html（静态页面）"},
-						{ name:"频道或模块文件夹或其他文件夹，请更名", icon:"/jslib/plugins/ztree/3.5.15/images/diy/folder.gif"},
+						{ name:"频道或模块文件夹或其他文件夹，请更名", icon:"/jslib/plugins/ztree/3.5.15/pub/images/diy/folder.gif"},
 						{ name:"in（静态包含文件）",
 							open:false,
 							children: [
